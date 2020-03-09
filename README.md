@@ -19,9 +19,9 @@ https://srnanwatkar.github.io/webSocket.github.io/build/index.html
 # Features!
 
   - Live Stock update on Dashboard
-  - On click of stock, modal will show current data for the stock
-  - Can max stock value and min stock value
-  - React SPA
+  - User can click on stock, modal will show current data for the stock
+  - User can view max stock value and min stock value
+  - React SPA, (redux)
 
 ### Installation
 
