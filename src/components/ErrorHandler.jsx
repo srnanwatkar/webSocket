@@ -4,7 +4,7 @@ export default class ErrorHandler extends Component {
     render() {
         return (
             <div>
-                Please Allow unsafe javascript for this application
+                Something went wrong.....
             </div>
         )
     }

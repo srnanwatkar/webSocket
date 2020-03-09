@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { handleModal } from './../actions/actions'
 
 class Modal extends Component {
+
     render() {
         return (
             <div className={'modal-container' + (this.props.isModalOpen ? '' : ' hidden')}>
@@ -26,11 +27,11 @@ class Modal extends Component {
                                     <div className='gradient-container'></div>
                                     <div className='value'>
                                         <span className={'caret ' + this.props.stockData[this.props.itemKey].cellClass}></span>
-                                        Current Value: <span>{this.props.stockData[this.props.itemKey].currentValue}</span>
+                                        Current Value: <span>{this.props.stockData[this.props.itemKey].currentValue} <i>(current stock stamp)</i></span>
                                     </div>
                                     <div className='disparity-container'>
-                                        <div>Max Stock Value: <span>{Math.max(...this.props.stockData[this.props.itemKey].history)}</span></div>
-                                        <div>Min Stock Value: <span>{Math.min(...this.props.stockData[this.props.itemKey].history)}</span></div>
+                                        <div><b>Max Stock Value:</b> <span>{Math.max(...this.props.stockData[this.props.itemKey].history)}</span></div>
+                                        <div><b>Min Stock Value:</b> <span>{Math.min(...this.props.stockData[this.props.itemKey].history)}</span></div>
                                     </div>
                                 </div>
                                 <div className='graph-container'>
