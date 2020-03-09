@@ -20,7 +20,7 @@ class Loader extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.isLoading
+        isLoading: state.stockDashboard.isLoading
     };
 };
 

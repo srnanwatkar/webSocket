@@ -2,12 +2,16 @@ import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import moment from 'moment';
 import {
-    FEW_SECONDS_AGO, _HOURS_AGO, _MINUTES_AGO, _SECONDS_AGO, LOADING, SET_DATA, SET_DATA_KEY, TOGGLE_MODAL
+    FEW_SECONDS_AGO, _HOURS_AGO, _MINUTES_AGO, _SECONDS_AGO
 } from '../constants/constants';
 import {
     Sparklines, SparklinesLine, SparklinesReferenceLine
 } from 'react-sparklines';
 import Modal from './Modal';
+
+/* functions from actions */
+import { handleLoader, handleModal, setDataInStore } from './../actions/actions';
+import { bindActionCreators } from 'redux';
 
 const webSocketUrl = 'ws://stocks.mnet.website/';
 
@@ -15,9 +19,10 @@ class Dashboard extends Component {
     constructor() {
         super();
         this.state = {
-            data: {}
+            data: {},
+            isModalOpen: false,
+            key: ''
         }
-        // this.handleModal = this.handleModal.bind(this);
     }
 
     componentWillMount() {
@@ -28,11 +33,15 @@ class Dashboard extends Component {
         };
         this.webSocketConnection.onmessage = this.handleStockEvents.bind(this);
 
-        /* Call Action */
-        this.props.handleLoader(false);
+        /* Call Action Loader */
+        this.props.handleLoader(true);
     }
 
     componentDidMount() {
+        /* Call Action, for Loading experience */
+        setTimeout(() => {
+            this.props.handleLoader(false);
+        }, 3000);
     }
 
     getTime(prevTime) {
@@ -62,9 +71,10 @@ class Dashboard extends Component {
     }
 
     handleStockEvents(event) {
-        console.log('event', event);
+
         let stockData = JSON.parse(event.data);
         let newStocks = this.state.data;
+
         /* Create Associative array for each stocks */
         stockData.map(item => {
             /* Check if it is a new stock */
@@ -95,11 +105,17 @@ class Dashboard extends Component {
         this.setState({
             data: newStocks
         });
+
+        /* Set Data in Store */
         this.props.setDataInStore(this.state.data);
     }
 
     handleModal(key) {
-        this.props.handleModal(key, true);
+        // this.props.handleModal(key, true);
+        this.setState({
+            isModalOpen: key ? true : false,
+            key: key ? key : ''
+        });
     }
 
     render() {
@@ -125,7 +141,7 @@ class Dashboard extends Component {
                         <tbody>
                             {
                                 Object.keys(this.state.data).map((item, i) => {
-                                    return <tr key={i} className='row-container' onClick={() => this.handleModal(item)} >
+                                    return <tr key={i} className='row-container' onClick={() => this.props.handleModal(item)} >
                                         <td>
                                             {item}
                                         </td>
@@ -150,7 +166,7 @@ class Dashboard extends Component {
                         </tbody>
                     </table>
                 </div >
-                <Modal />
+                <Modal stockData={this.state.data[this.state.key]} dataKey={this.state.key} />
             </Fragment>
         );
     }
@@ -158,7 +174,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.isLoading
+        isLoading: state.stockDashboard.isLoading
     };
 };
 
@@ -167,33 +183,11 @@ const mapStateToProps = state => {
  * Actions
  */
 const mapDispatchToProps = dispatch => {
-    return {
-        handleLoader: (value) => {
-            dispatch({
-                type: LOADING,
-                payload: value
-            });
-        },
-        setDataInStore: (data) => {
-            dispatch({
-                type: SET_DATA,
-                payload: data
-            });
-        },
-        handleModal: (key, value) => {
-            dispatch([
-                {
-                    type: SET_DATA_KEY,
-                    payload: key
-                },
-                {
-                    type: TOGGLE_MODAL,
-                    payload: value
-                }
-            ]);
-        },
-    }
-
+    return bindActionCreators({
+        handleLoader,
+        setDataInStore,
+        handleModal
+    }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

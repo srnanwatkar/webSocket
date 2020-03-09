@@ -1,9 +1,10 @@
-import { LOADING, SET_DATA, TOGGLE_MODAL } from '../constants/constants';
+import { LOADING, SET_DATA, TOGGLE_MODAL, SET_DATA_KEY } from '../constants/constants';
 
 const initialState = {
     isLoading: false,
-    stockData: {},
-    isModalOpen: false
+    stockData: null,
+    isModalOpen: false,
+    itemKey: ''
 };
 
 const stockDashboard = (state = initialState, action) => {
@@ -22,6 +23,11 @@ const stockDashboard = (state = initialState, action) => {
             return state = {
                 ...state,
                 isModalOpen: action.payload
+            }
+        case SET_DATA_KEY:
+            return state = {
+                ...state,
+                itemKey: action.payload
             }
         default:
             return state

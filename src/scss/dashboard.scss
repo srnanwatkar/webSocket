@@ -42,16 +42,6 @@
     }
   }
 
-  /* Caret */
-  /* Styles for caret icons */
-  .caret {
-    width: 0;
-    height: 0;
-    display: inline-block;
-    border: 7px solid transparent;
-    margin-right: 6px;
-  }
-
   /* Tbody Container */
   .row-container {
     &:nth-child(even) {
@@ -80,4 +70,27 @@
       }
     }
   }
+}
+
+/* Caret */
+/* Styles for caret icons */
+.caret {
+  width: 0;
+  height: 0;
+  display: inline-block;
+  border: 7px solid transparent;
+  margin-right: 6px;
+}
+
+.stock-down {
+  color: red;
+  border-top-color: red;
+  position: relative;
+  top: 5px;
+}
+.stock-up {
+  color: green;
+  border-bottom-color: green;
+  position: relative;
+  top: -2px;
 }
