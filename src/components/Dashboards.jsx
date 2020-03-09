@@ -20,7 +20,6 @@ class Dashboard extends Component {
         super();
         this.state = {
             data: {},
-            isModalOpen: false,
             key: ''
         }
     }
@@ -116,6 +115,9 @@ class Dashboard extends Component {
             isModalOpen: key ? true : false,
             key: key ? key : ''
         });
+
+        /* Manager data in store */
+        this.props.handleModal(key)
     }
 
     render() {
@@ -141,7 +143,7 @@ class Dashboard extends Component {
                         <tbody>
                             {
                                 Object.keys(this.state.data).map((item, i) => {
-                                    return <tr key={i} className='row-container' onClick={() => this.props.handleModal(item)} >
+                                    return <tr key={i} className='row-container' onClick={() => this.handleModal(item)} >
                                         <td>
                                             {item}
                                         </td>
@@ -166,7 +168,11 @@ class Dashboard extends Component {
                         </tbody>
                     </table>
                 </div >
-                <Modal stockData={this.state.data[this.state.key]} dataKey={this.state.key} />
+                <Modal
+                    isModalOpen={this.props.isModalOpen}
+                    stockData={this.state.data}
+                    dataKey={this.state.key}
+                    handleModal={this.handleModal.bind(this)} />
             </Fragment>
         );
     }
@@ -174,7 +180,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.stockDashboard.isLoading
+        isLoading: state.stockDashboard.isLoading,
+        isModalOpen: state.stockDashboard.isModalOpen,
     };
 };
 

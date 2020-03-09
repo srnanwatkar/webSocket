@@ -1,5 +1,6 @@
+@import "./colors.scss";
+
 .dashboard-container {
-  //   padding: 4%;
   padding: 40px 60px;
 
   .heading-container {
@@ -24,7 +25,7 @@
   }
 
   table {
-    border: 1px solid #d2d2d2;
+    border: 1px solid $BOX_BORDER;
     border-spacing: 0;
     border-radius: 4px;
     margin: 0 auto;
@@ -37,7 +38,7 @@
     thead {
       font-size: 16px;
       tr {
-        border: 1px solid #d2d2d2;
+        border: 1px solid $BOX_BORDER;
       }
     }
   }
@@ -49,12 +50,12 @@
     }
 
     .stock-down {
-      color: red;
-      border-top-color: red;
+      color: $RED;
+      border-top-color: $RED;
     }
     .stock-up {
-      color: green;
-      border-bottom-color: green;
+      color: $GREEN;
+      border-bottom-color: $GREEN;
     }
 
     /* Stock Value container */
@@ -83,14 +84,14 @@
 }
 
 .stock-down {
-  color: red;
-  border-top-color: red;
+  color: $RED;
+  border-top-color: $RED;
   position: relative;
   top: 5px;
 }
 .stock-up {
-  color: green;
-  border-bottom-color: green;
+  color: $GREEN;
+  border-bottom-color: $GREEN;
   position: relative;
   top: -2px;
 }

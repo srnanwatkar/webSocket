@@ -1,7 +1,6 @@
 # Web Socket
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)]()
-
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)]() [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react)
 React based application for Web Socket. 
 #### Access the App:
 https://srnanwatkar.github.io/webSocket.github.io/build/index.html

@@ -1,3 +1,5 @@
+@import "./colors.scss";
+
 .modal-container {
   position: fixed;
   transition: all ease-in-out 0.2s;
@@ -52,7 +54,7 @@
       }
       .gradient-container {
         height: 2px;
-        background: linear-gradient(to right, grey, #fff);
+        background: linear-gradient(to right, $GREY, $WHITE);
       }
       .value {
         margin-top: 12px;

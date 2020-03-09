@@ -1,5 +1,9 @@
 import { SET_DATA, LOADING, SET_DATA_KEY, TOGGLE_MODAL } from "../constants/constants";
 
+/**
+ * Handle on init Loader
+ * @param value
+ */
 export function handleLoader(value) {
     return (dispatch) => {
         dispatch({
@@ -9,6 +13,10 @@ export function handleLoader(value) {
     };
 }
 
+/**
+ * Set the Stock data in the store
+ * @param data
+ */
 export function setDataInStore(data) {
     return (dispatch) => {
         dispatch({
@@ -18,6 +26,10 @@ export function setDataInStore(data) {
     };
 }
 
+/**
+ * Handle Modal open/close
+ * @param key 
+ */
 export function handleModal(key) {
     return (dispatch) => {
         dispatch([
